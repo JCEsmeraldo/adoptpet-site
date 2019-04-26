@@ -1,13 +1,41 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
-import usersData from './UsersData'
+// import usersData from './UsersData'
+
+const axios = require('axios');
 
 class User extends Component {
 
+  async getUser() {
+    try {
+      const response = await axios.get('http://localhost:3000/usuarios/2');
+      console.log(response);
+      return response.data
+    } catch (error) {
+      console.error(error);
+    }
+    //   await axios.get('http://localhost:3000/usuarios/2')
+    //   .then(function (response) {
+    //     const userAux = response.data;
+    //     console.log(response.data); //AQUI ESSAA MERDA RETORNA O QUE EU QUERO
+    //      return userAux;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })
+    //   .then(function (data) {
+    //     // return data;
+    // });
+  }
+  
   render() {
 
-    const user = usersData.find( user => user.id.toString() === this.props.match.params.id)
+
+    const user = this.getUser()
+    console.log(user); //AQUI VEM O FDP DO PROMISE
+    
+    
 
     const userDetails = user ? Object.entries(user) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
 
