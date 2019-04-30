@@ -6,15 +6,15 @@ class Register extends Component {
     return (
       <div className="app flex-row align-items-center">
         <Container>
-          {/* <Row form>
-            <Col md="12" lg="12" xl="12"> */}
+           <Row form>
+            <Col md="12" lg="12" xl={{size: 6, offset: 3}}> 
               <Card className="mx-2">
                 <CardBody className="p-4">
                   <Form>
                     <h1>Registro</h1>
                     <br/>
                     <Row>
-                      <Col md={12} lg={4} xl={4}>
+                      <Col md={12} lg={4} xl={12}>
                         <InputGroup className="mb-3">
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>
@@ -24,7 +24,7 @@ class Register extends Component {
                           <Input type="text" placeholder="Nome" autoComplete="nome" />
                         </InputGroup>
                       </Col>
-                      <Col md={12} lg={4} xl={4}>
+                      <Col md={12} lg={4} xl={12}>
                         <InputGroup className="mb-3">
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>@</InputGroupText>
@@ -32,7 +32,7 @@ class Register extends Component {
                           <Input type="text" placeholder="Email" autoComplete="email" />
                         </InputGroup>
                       </Col>
-                      <Col md={12} lg={4} xl={{4}}>
+                      <Col md={12} lg={4} xl={12}>
                         <InputGroup className="mb-3">
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>
@@ -44,7 +44,7 @@ class Register extends Component {
                       </Col>
                     </Row>
                     <Row>
-                    <Col md={12} lg={2} xl={2}>
+                    <Col md={12} lg={2} xl={4}>
                       <FormGroup>
                         <Input type="select" name="select" id="select">
                           <option>CPF</option>
@@ -52,22 +52,22 @@ class Register extends Component {
                         </Input>
                       </FormGroup>
                     </Col>
-                    <Col md={12} lg={6} xl={5}>
+                    <Col md={12} lg={6} xl={4}>
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                         </InputGroupAddon>
                         <Input type="text" placeholder="CPF"/>
                       </InputGroup>
                     </Col>
-                    {/* <Col md={12} lg={6} xl={5}>
-                      <InputGroup className="mb-3">
+                    <Col md={12} lg={6} xl={4}>
+                      <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                         </InputGroupAddon>
                         <Input type="text" placeholder="CNPJ"/>
                       </InputGroup>
-                    </Col> */}
+                    </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                       <Col md={12} lg={3} xl={5}>
                         <InputGroup className="mb-3">
                           <InputGroupAddon addonType="prepend">
@@ -126,7 +126,7 @@ class Register extends Component {
                           <Input type="text" placeholder="Telefone"/>
                         </InputGroup>
                       </Col>
-                    </Row>
+                    </Row> */}
                     <Col md={12} lg={2} xl={{size: 4, offset: 4}}>
                       <Button color="success" block>Inscreva-se</Button>
                     </Col>
@@ -143,8 +143,8 @@ class Register extends Component {
                   </Row>
                 </CardFooter> */}
               </Card>
-            {/* </Col>
-          </Row > */}
+            </Col>
+          </Row >
         </Container>
       </div>
     );
