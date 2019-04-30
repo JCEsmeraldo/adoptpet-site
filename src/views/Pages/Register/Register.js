@@ -32,7 +32,7 @@ class Register extends Component {
                           <Input type="text" placeholder="Email" autoComplete="email" />
                         </InputGroup>
                       </Col>
-                      <Col md={12} lg={4} xl={{size: 4}}>
+                      <Col md={12} lg={4} xl={{4}}>
                         <InputGroup className="mb-3">
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>
