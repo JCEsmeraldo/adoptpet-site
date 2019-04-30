@@ -7,37 +7,43 @@ const axios = require('axios');
 
 class User extends Component {
 
-  async getUser() {
-    try {
-      const response = await axios.get('http://localhost:3000/usuarios/2');
-      console.log(response);
-      return response.data
-    } catch (error) {
-      console.error(error);
+  constructor(props){
+    super(props)
+    this.state = {
+      usuario: {}
     }
-    //   await axios.get('http://localhost:3000/usuarios/2')
-    //   .then(function (response) {
-    //     const userAux = response.data;
-    //     console.log(response.data); //AQUI ESSAA MERDA RETORNA O QUE EU QUERO
-    //      return userAux;
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   })
-    //   .then(function (data) {
-    //     // return data;
-    // });
+  }
+
+  componentDidMount(){
+    this.getUser()
+  }
+
+  getUser() {
+    axios.get('http://localhost:3000/usuarios/2')
+    .then((res) => this.setState({usuario: res.data}))
+      // .then(function (response) {
+        
+      //   console.log(response.data); //AQUI ESSAA MERDA RETORNA O QUE EU QUERO
+      //   this.setState({usuario: response})
+        
+      // })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // return data;
+    });
   }
   
   render() {
 
 
-    const user = this.getUser()
-    console.log(user); //AQUI VEM O FDP DO PROMISE
+    
+    // console.log(user); //AQUI VEM O FDP DO PROMISE
     
     
 
-    const userDetails = user ? Object.entries(user) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
+    const userDetails = this.state.usuario ? Object.entries(this.state.usuario) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
 
     return (
       <div className="animated fadeIn">
