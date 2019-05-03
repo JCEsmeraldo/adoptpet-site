@@ -2,7 +2,30 @@ import React, { Component } from 'react';
 import {Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, FormGroup} from 'reactstrap';
 
 class Register extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      selectType : "cpf"
+    }
+  }
+
+  _handleChange = event => {
+    this.setState({
+      selectType: event.target.value
+    })
+  }
+
   render() {
+    let inputCpfCnpj
+
+    if(this.state.selectType === "cpf") {
+      console.log('cpf')
+      inputCpfCnpj = <Input type="text" placeholder="CPF"/>
+    } else {
+      console.log('cnpj')
+      inputCpfCnpj = <Input type="text" placeholder="CNPJ"/>
+    }
+    
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -46,13 +69,16 @@ class Register extends Component {
                     <Row>
                     <Col md={12} lg={2} xl={4}>
                       <FormGroup>
-                        <Input type="select" name="select" id="select">
-                          <option>CPF</option>
-                          <option>CNPJ</option>
+                        <Input value={this.state.selectType} type="select" name="select" id="select" onChange={this._handleChange}>
+                          <option value="cpf">CPF</option>
+                          <option value="cnpj">CNPJ</option>
                         </Input>
                       </FormGroup>
                     </Col>
-                    <Col md={12} lg={6} xl={4}>
+                    <Col md={12} lg={6} xl={7}>
+                      {inputCpfCnpj}
+                    </Col>
+                    {/* <Col md={12} lg={6} xl={4}>
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                         </InputGroupAddon>
@@ -61,11 +87,9 @@ class Register extends Component {
                     </Col>
                     <Col md={12} lg={6} xl={4}>
                       <InputGroup className="mb-4">
-                        <InputGroupAddon addonType="prepend">
-                        </InputGroupAddon>
                         <Input type="text" placeholder="CNPJ"/>
                       </InputGroup>
-                    </Col>
+                    </Col> */}
                     </Row>
                     {/* <Row>
                       <Col md={12} lg={3} xl={5}>
