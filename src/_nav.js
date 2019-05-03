@@ -10,7 +10,7 @@ export default {
       },
     },
     {
-      name: 'Pets',
+      name: 'Meus Pets',
       url: '/pets',
       icon: 'fa fa-paw',
     },

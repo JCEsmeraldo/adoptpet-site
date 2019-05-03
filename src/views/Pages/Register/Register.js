@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import {Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, FormGroup} from 'reactstrap';
-
+const axios = require('axios');
 class Register extends Component {
   constructor(props){
     super(props)
     this.state = {
-      selectType : "cpf"
+      selectType : "cpf",
+      nome : '',
+      email : '',
+      senha : '',
+      cpfcnpj : '',
+
     }
   }
 
@@ -15,15 +20,39 @@ class Register extends Component {
     })
   }
 
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      nome: this.state.nome,
+      email: this.state.email,
+      senha: this.state.senha,
+      cpf_cnpj: this.state.cpfcnpj
+
+    };
+    console.log(user);
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/usuarios/',
+      data: user
+    });
+    
+  }
+
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+
   render() {
     let inputCpfCnpj
 
     if(this.state.selectType === "cpf") {
       console.log('cpf')
-      inputCpfCnpj = <Input type="text" placeholder="CPF"/>
+      inputCpfCnpj = <Input name="cpfcnpj" onChange={this.onChange} type="text" placeholder="CPF"/>
     } else {
       console.log('cnpj')
-      inputCpfCnpj = <Input type="text" placeholder="CNPJ"/>
+      inputCpfCnpj = <Input name="cpfcnpj" onChange={this.onChange} type="text" placeholder="CNPJ"/>
     }
     
     return (
@@ -33,8 +62,8 @@ class Register extends Component {
             <Col md="12" lg="12" xl={{size: 6, offset: 3}}> 
               <Card className="mx-2">
                 <CardBody className="p-4">
-                  <Form>
-                    <h1>Registro</h1>
+                  <Form onSubmit={this.handleSubmit}>
+                    <h1>Cadastro</h1>
                     <br/>
                     <Row>
                       <Col md={12} lg={4} xl={12}>
@@ -44,7 +73,7 @@ class Register extends Component {
                               <i className="icon-user"></i>
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input type="text" placeholder="Nome" autoComplete="nome" />
+                          <Input name="nome" type="text" onChange={this.onChange} placeholder="Nome" autoComplete="nome" />
                         </InputGroup>
                       </Col>
                       <Col md={12} lg={4} xl={12}>
@@ -52,7 +81,7 @@ class Register extends Component {
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>@</InputGroupText>
                           </InputGroupAddon>
-                          <Input type="text" placeholder="Email" autoComplete="email" />
+                          <Input name="email" type="text" onChange={this.onChange} placeholder="Email" autoComplete="email" />
                         </InputGroup>
                       </Col>
                       <Col md={12} lg={4} xl={12}>
@@ -62,7 +91,7 @@ class Register extends Component {
                               <i className="icon-lock"></i>
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input type="password" placeholder="Senha" autoComplete="new-password" />
+                          <Input name="senha" type="password" onChange={this.onChange} placeholder="Senha" autoComplete="new-password" />
                         </InputGroup>
                       </Col>
                     </Row>
@@ -75,7 +104,7 @@ class Register extends Component {
                         </Input>
                       </FormGroup>
                     </Col>
-                    <Col md={12} lg={6} xl={7}>
+                    <Col md={12} lg={6} xl={8}>
                       {inputCpfCnpj}
                     </Col>
                     {/* <Col md={12} lg={6} xl={4}>
@@ -152,7 +181,7 @@ class Register extends Component {
                       </Col>
                     </Row> */}
                     <Col md={12} lg={2} xl={{size: 4, offset: 4}}>
-                      <Button color="success" block>Inscreva-se</Button>
+                      <Button type="submit" color="success" block>Inscreva-se</Button>
                     </Col>
                   </Form>
                 </CardBody>
