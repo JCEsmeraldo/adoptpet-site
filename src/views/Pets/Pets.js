@@ -1,40 +1,45 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
-
-// import usersData from './UsersData'
+import PetsTable from './PetsTable';
 
 const axios = require('axios');
 
 class Pets extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
-      pets: {}
+      pets: []
     }
   }
 
   componentDidMount() {
-    this.getPets()
+    this.findAllPets()
   }
 
-  getPets() {
+  findAllPets() {
     axios.get('https://adoptpet-api.herokuapp.com/pets')
-      .then((res) => this.setState({ pets: res.data }))
-       
-      .catch(function (error) {
-        console.log(":(");
-      })
-      .then(function () {
-        // return data;
-      });
+    .then(res => {
+      this.setState({pets: res.data})
+      console.log(this.state.pets)
+    })
+    .catch(function (error) {
+      console.log(":(")
+    })
+  }
+
+  petsList() {
+    if (this.state.pets) {
+        return this.state.pets.map((pets =>
+            <PetsTable key={pets.id} nome={pets.nome}
+            data_nasc={pets.data_nasc} genero={pets.genero} especie={pets.especie}/>
+        ));
+    } else {
+        return
+    }
   }
 
   render() {
-    console.log(this.state.pets)
-    // console.log(user); //AQUI VEM O FDP DO PROMISE
-
-    // const userDetails = this.state.usuario ? Object.entries(this.state.usuario) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
+    const petsDetails = this.petsList()
 
     return (
       <div className="animated fadeIn">
@@ -47,37 +52,16 @@ class Pets extends Component {
               <CardBody>
                 <Table>
                   <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Nome</th>
-                      <th>Idade</th>
-                      <th>Gênero</th>
-                      <th>Espécie</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                      <td>@mdo</td>
-                    </tr>
-                  </tbody>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Idade</th>
+                        <th scope="col">Gênero</th>
+                        <th scope="col">Espécie</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {petsDetails}
+                    </tbody>
                 </Table>
               </CardBody>
             </Card>

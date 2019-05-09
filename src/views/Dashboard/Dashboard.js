@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardBody, Col, CardFooter, Button } from 'reactstrap';
 
+// const axios = require('axios');
+
 class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      animal: null
+      dogs: null
     }
   }
+
+  // componentDidMount(){
+  //   this.getDogs()
+  // }
+
+  // getDogs() {
+  //   axios.get('https://adoptpet-api.herokuapp.com/pets')
+  //     .then((res) => this.setState({ dogs: res.data }))
+  //      console.log(res)
+  //     .catch(function (error) {
+  //       console.log(":(");
+  //     })
+  //     .then(function () {
+  //       // return data;
+  //     });
+  // }
 
   render() {
 
