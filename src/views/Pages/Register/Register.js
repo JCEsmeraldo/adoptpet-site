@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, FormGroup} from 'reactstrap';
 const axios = require('axios');
+
 class Register extends Component {
   constructor(props){
     super(props)
@@ -95,29 +96,17 @@ class Register extends Component {
                       </Col>
                     </Row>
                     <Row>
-                    <Col md={12} lg={2} xl={4}>
-                      <FormGroup>
-                        <Input value={this.state.selectType} type="select" name="select" id="select" onChange={this._handleChange}>
-                          <option value="cpf">CPF</option>
-                          <option value="cnpj">CNPJ</option>
-                        </Input>
-                      </FormGroup>
-                    </Col>
-                    <Col md={12} lg={6} xl={8}>
-                      {inputCpfCnpj}
-                    </Col>
-                    {/* <Col md={12} lg={6} xl={4}>
-                      <InputGroup className="mb-3">
-                        <InputGroupAddon addonType="prepend">
-                        </InputGroupAddon>
-                        <Input type="text" placeholder="CPF"/>
-                      </InputGroup>
-                    </Col>
-                    <Col md={12} lg={6} xl={4}>
-                      <InputGroup className="mb-4">
-                        <Input type="text" placeholder="CNPJ"/>
-                      </InputGroup>
-                    </Col> */}
+                      <Col md={12} lg={2} xl={4}>
+                        <FormGroup>
+                          <Input value={this.state.selectType} type="select" name="select" id="select" onChange={this._handleChange}>
+                            <option value="cpf">CPF</option>
+                            <option value="cnpj">CNPJ</option>
+                          </Input>
+                        </FormGroup>
+                      </Col>
+                      <Col md={12} lg={6} xl={8}>
+                        {inputCpfCnpj}
+                      </Col>
                     </Row>
                     {/* <Row>
                       <Col md={12} lg={3} xl={5}>

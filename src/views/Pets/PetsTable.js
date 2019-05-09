@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class PetsTable extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     return (
