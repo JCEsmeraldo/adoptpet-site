@@ -1,33 +1,44 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, Col, CardFooter, Button } from 'reactstrap';
+import { Row } from 'reactstrap';
+import PetsCard from '../Pets/PetsCard';
 
-// const axios = require('axios');
+const axios = require('axios');
 
 class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      dogs: null
+      pets: []
     }
   }
 
-  // componentDidMount(){
-  //   this.getDogs()
-  // }
+  componentDidMount(){
+    this.findAllPets()
+  }
 
-  // getDogs() {
-  //   axios.get('https://adoptpet-api.herokuapp.com/pets')
-  //     .then((res) => this.setState({ dogs: res.data }))
-  //      console.log(res)
-  //     .catch(function (error) {
-  //       console.log(":(");
-  //     })
-  //     .then(function () {
-  //       // return data;
-  //     });
-  // }
+  findAllPets() {
+    axios.get('https://adoptpet-api.herokuapp.com/pets')
+    .then(res => {
+      this.setState({pets: res.data})
+      console.log(this.state.pets)
+    })
+    .catch(function (error) {
+      console.log(":(")
+    })
+  }
+
+  petsCardList() {
+    if (this.state.pets) {
+        return this.state.pets.map((pets =>
+            <PetsCard key={pets.id} nome={pets.nome}/>
+        ));
+    } else {
+        return
+    }
+  }
 
   render() {
+    const petsCard = this.petsCardList()
 
     return (
       <div className="animated fadeIn">
@@ -36,19 +47,9 @@ class Dashboard extends Component {
           It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
         </p>
         <br />
-        <Col xl="4">
-          <Card>
-            {/* <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" /> */}
-            <CardBody>
-              <p className="text-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-            </CardBody>
-            <CardFooter>
-              <CardText>Nome do Cachorro</CardText>
-              <CardText>Genero</CardText>
-            </CardFooter>
-            <Button color="primary" href="#">Saiba mais</Button>
-          </Card>
-        </Col>
+        <Row>
+          {petsCard}
+        </Row>
       </div>
     );
   }

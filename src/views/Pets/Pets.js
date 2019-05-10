@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table, Button, Modal, ModalBody, ModalHeader, ModalFooter,
-Input, InputGroup, InputGroupText, FormGroup, Label } from 'reactstrap';
+Input, InputGroup, FormGroup, Label } from 'reactstrap';
 import PetsTable from './PetsTable';
 
 const axios = require('axios');
@@ -61,31 +61,23 @@ class Pets extends Component {
           <ModalHeader toggle={this.toggle}>Adicione seu novo Pet</ModalHeader>
           <ModalBody>
             <Row form>
-              <Col md={12} lg={4} xl={6}>
+              <Col md={12} lg={4} xl={7}>
                 <InputGroup className="mb-3">
-                  <InputGroupText>
-                    {/* <i className="icon-user"></i> */}
-                  </InputGroupText>
+                  {/* <InputGroupText>
+                    {<i className="icon-user"></i>}
+                  </InputGroupText> */}
                   <Input name="nome" type="text" onChange={this.onChange} placeholder="Nome" autoComplete="nome" />
                 </InputGroup>
               </Col>
-              <Col md={12} lg={4} xl={6}>
+              <Col md={12} lg={4} xl={5}>
                 <InputGroup className="mb-3">
-                  <InputGroupText>
-                    {/* <i className="icon-user"></i> */}
-                  </InputGroupText>
-                  <Input name="idade" type="text" onChange={this.onChange} placeholder="Idade" autoComplete="idade" />
+                  {/* <InputGroupText>
+                    {<i className="icon-user"></i>}
+                  </InputGroupText> */}
+                  <Input name="idade" type="date" onChange={this.onChange} autoComplete="data_nasc" />
                 </InputGroup>
               </Col>
-              <Col md={12} lg={4} xl={12}>
-                <InputGroup className="mb-3">
-                  <InputGroupText>
-                    {<i className="icon-mars"></i>}
-                  </InputGroupText>
-                  <Input name="genero" type="text" onChange={this.onChange} placeholder="Gênero" autoComplete="genero" />
-                </InputGroup>
-              </Col>
-              <Col md={12} lg={2} xl={4}>
+              <Col md={12} lg={2} xl={5}>
                 <FormGroup>
                   <Label for="select">Espécie</Label>
                   <Input type="select" name="select" id="select" onChange={this._handleChange}>
@@ -94,13 +86,33 @@ class Pets extends Component {
                   </Input>
                 </FormGroup>
               </Col>
-              <Col md={12} lg={4} xl={12}>
-                <InputGroup className="mb-3">
-                  <InputGroupText>
-                    {/* {<i className="icon-mars"></i>} */}
-                  </InputGroupText>
-                  <Input name="porte" type="text" onChange={this.onChange} placeholder="Porte" autoComplete="porte" />
-                </InputGroup>
+              <Col md={12} lg={2} xl={5}>
+                <FormGroup>
+                  <Label for="select">Porte</Label>
+                  <Input type="select" name="select" id="select" onChange={this._handleChange}>
+                    <option value="pequeno">Pequeno</option>
+                    <option value="medio">Médio</option>
+                    <option value="grande">Grande</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+              {/* <Col>
+                <FormGroup>
+                  <Label for="genero">Gênero</Label>
+                  <div>
+                    <CustomInput value="M" type="checkbox" id="macho" label="Macho" inline />
+                    <CustomInput value="F" type="checkbox" id="femea" label="Fêmea" inline />
+                  </div>
+                </FormGroup>
+              </Col> */}
+              <Col md={12} lg={2} xl={2}>
+                <FormGroup>
+                  <Label for="select">Gênero</Label>
+                  <Input type="select" name="select" id="select" onChange={this._handleChange}>
+                    <option value="m">M</option>
+                    <option value="f">F</option>
+                  </Input>
+                </FormGroup>
               </Col>
               <Col md={12} lg={4} xl={12}>
                 <FormGroup>
@@ -127,6 +139,7 @@ class Pets extends Component {
                         <th scope="col">Idade</th>
                         <th scope="col">Gênero</th>
                         <th scope="col">Espécie</th>
+                        {/* <th scope="col">Editar/Excluir</th> */}
                       </tr>
                     </thead>
                     <tbody>
