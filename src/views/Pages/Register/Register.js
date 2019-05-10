@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, FormGroup} from 'reactstrap';
+// import {Login} from './../Login';
 const axios = require('axios');
 
 class Register extends Component {
@@ -11,7 +12,7 @@ class Register extends Component {
       email : '',
       senha : '',
       cpfcnpj : '',
-
+      erro : '',
     }
   }
 
@@ -32,10 +33,16 @@ class Register extends Component {
 
     };
     console.log(user);
-    axios({
-      method: 'post',
-      url: 'http://localhost:3000/usuarios/',
-      data: user
+    axios.post('https://adoptpet-api.herokuapp.com/usuarios/', user)
+    .then(function (response) {
+      console.log(response.data);
+      if(response.data.id){
+        window.location.href = "http://localhost:3001/#/login";
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert("Email já registrado!")
     });
     
   }
