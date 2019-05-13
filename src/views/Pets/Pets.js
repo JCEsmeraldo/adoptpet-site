@@ -10,7 +10,14 @@ class Pets extends Component {
     super(props)
     this.state = {
       pets: [],
-      modal: false
+      modal: false,
+      nome : '',
+      data_nasc : '',
+      especie: '',
+      porte : '',
+      genero : '',
+      descricao : '',
+
     }
   }
 
@@ -27,6 +34,35 @@ class Pets extends Component {
     .catch(function (error) {
       console.log(":(")
     })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const pet = {
+      nome: this.state.nome,
+      data_nasc: this.state.data_nasc,
+      especie: this.state.especie,
+      porte: this.state.porte,
+      genero: this.state.genero,
+      descricao: this.state.descricao,
+      id_usuario: 1
+    };
+    console.log(pet);
+    axios.post('https://adoptpet-api.herokuapp.com/pets/', pet)
+    .then(function (response) {
+      console.log(response.data);
+      // console.log(response.data)
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   petsList() {
@@ -57,7 +93,7 @@ class Pets extends Component {
           </Col>
         </Row>
         <br/>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal  isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Adicione seu novo Pet</ModalHeader>
           <ModalBody>
             <Row form>
@@ -74,55 +110,47 @@ class Pets extends Component {
                   {/* <InputGroupText>
                     {<i className="icon-user"></i>}
                   </InputGroupText> */}
-                  <Input name="idade" type="date" onChange={this.onChange} autoComplete="data_nasc" />
+                  <Input name="data_nasc" type="date" onChange={this.onChange} autoComplete="data_nasc" />
                 </InputGroup>
               </Col>
               <Col md={12} lg={2} xl={5}>
                 <FormGroup>
-                  <Label for="select">Espécie</Label>
-                  <Input type="select" name="select" id="select" onChange={this._handleChange}>
-                    <option value="cao">Cão</option>
-                    <option value="gato">Gato</option>
+                  <Label for="especie">Espécie</Label>
+                  <Input type="select" name="especie" id="especie" onChange={this.onChange}>
+                    <option value="Cão">Cão</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Passaro">Passaro</option>
                   </Input>
                 </FormGroup>
               </Col>
               <Col md={12} lg={2} xl={5}>
                 <FormGroup>
-                  <Label for="select">Porte</Label>
-                  <Input type="select" name="select" id="select" onChange={this._handleChange}>
-                    <option value="pequeno">Pequeno</option>
-                    <option value="medio">Médio</option>
-                    <option value="grande">Grande</option>
+                  <Label for="porte">Porte</Label>
+                  <Input type="select" name="porte" id="porte" onChange={this.onChange}>
+                    <option value="Pequeno">Pequeno</option>
+                    <option value="Medio">Médio</option>
+                    <option value="Grande">Grande</option>
                   </Input>
                 </FormGroup>
               </Col>
-              {/* <Col>
-                <FormGroup>
-                  <Label for="genero">Gênero</Label>
-                  <div>
-                    <CustomInput value="M" type="checkbox" id="macho" label="Macho" inline />
-                    <CustomInput value="F" type="checkbox" id="femea" label="Fêmea" inline />
-                  </div>
-                </FormGroup>
-              </Col> */}
               <Col md={12} lg={2} xl={2}>
                 <FormGroup>
-                  <Label for="select">Gênero</Label>
-                  <Input type="select" name="select" id="select" onChange={this._handleChange}>
-                    <option value="m">M</option>
-                    <option value="f">F</option>
+                  <Label for="genero">Gênero</Label>
+                  <Input type="select" name="genero" id="genero" onChange={this.onChange}>
+                    <option value="m">Macho</option>
+                    <option value="f">Fêmea</option>
                   </Input>
                 </FormGroup>
               </Col>
               <Col md={12} lg={4} xl={12}>
                 <FormGroup>
-                  <Input type="textarea" name="text" onChange={this.onChange} placeholder="Descrição" id="descricao"/>
+                  <Input type="textarea" name="descricao" onChange={this.onChange} placeholder="Descrição" id="descricao"/>
                 </FormGroup>
               </Col>
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={this.toggle}>Adicionar</Button>
+            <Button color="success" onClick={this.handleSubmit}>Adicionar</Button>
           </ModalFooter>
         </Modal>
         <Row>
