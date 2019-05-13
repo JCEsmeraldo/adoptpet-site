@@ -123,7 +123,7 @@ class Pets extends Component {
                   </Input>
                 </FormGroup>
               </Col>
-              <Col md={12} lg={2} xl={5}>
+              <Col md={12} lg={2} xl={4}>
                 <FormGroup>
                   <Label for="porte">Porte</Label>
                   <Input type="select" name="porte" id="porte" onChange={this.onChange}>
@@ -133,7 +133,7 @@ class Pets extends Component {
                   </Input>
                 </FormGroup>
               </Col>
-              <Col md={12} lg={2} xl={2}>
+              <Col md={12} lg={2} xl={3}>
                 <FormGroup>
                   <Label for="genero">Gênero</Label>
                   <Input type="select" name="genero" id="genero" onChange={this.onChange}>
@@ -146,6 +146,16 @@ class Pets extends Component {
                 <FormGroup>
                   <Input type="textarea" name="descricao" onChange={this.onChange} placeholder="Descrição" id="descricao"/>
                 </FormGroup>
+              </Col>
+              <Col md={12} lg={4} xl={12}>
+              <FormGroup>
+                <Label for="file">Foto</Label>
+                <Input type="file" name="file" id="file" />
+                {/* <FormText color="muted">
+                  This is some placeholder block-level help text for the above input.
+                  It's a bit lighter and easily wraps to a new line.
+                </FormText> */}
+              </FormGroup>
               </Col>
             </Row>
           </ModalBody>
