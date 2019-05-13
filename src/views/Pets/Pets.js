@@ -150,7 +150,7 @@ class Pets extends Component {
               <Col md={12} lg={4} xl={12}>
               <FormGroup>
                 <Label for="file">Foto</Label>
-                <Input type="file" name="file" id="file" />
+                <Input type="file" name="file" id="file" accept="image/png, image/jpeg" />
                 {/* <FormText color="muted">
                   This is some placeholder block-level help text for the above input.
                   It's a bit lighter and easily wraps to a new line.
