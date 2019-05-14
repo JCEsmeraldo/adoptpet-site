@@ -17,9 +17,20 @@ class Pets extends Component {
       porte : '',
       genero : '',
       descricao : '',
-
+      foto : '',
     }
   }
+
+  getBase64(file, cb) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        cb(reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+}
 
   componentDidMount() {
     this.findAllPets()
@@ -29,7 +40,7 @@ class Pets extends Component {
     axios.get('https://adoptpet-api.herokuapp.com/pets/usuarios/1')
     .then(res => {
       this.setState({pets: res.data})
-      console.log(this.state.pets)
+      // console.log(this.state.pets)
     })
     .catch(function (error) {
       console.log(":(")
@@ -46,14 +57,14 @@ class Pets extends Component {
       porte: this.state.porte,
       genero: this.state.genero,
       descricao: this.state.descricao,
-      id_usuario: 1
+      id_usuario: 1,
+      foto : this.state.foto
     };
+
     console.log(pet);
     axios.post('https://adoptpet-api.herokuapp.com/pets/', pet)
     .then(function (response) {
       console.log(response.data);
-      // console.log(response.data)
-      
     })
     .catch(function (error) {
       console.log(error);
@@ -61,9 +72,18 @@ class Pets extends Component {
     
   }
 
+
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  onSelectImg = (e) => {
+    this.getBase64(e.target.files[0], (result) => {
+        this.setState({ 'foto': result });
+    });
+    // this.setState({ [e.target.name]: e.target.files[0] });
+  }
+
 
   petsList() {
     if (this.state.pets) {
@@ -149,8 +169,8 @@ class Pets extends Component {
               </Col>
               <Col md={12} lg={4} xl={12}>
               <FormGroup>
-                <Label for="file">Foto</Label>
-                <Input type="file" name="file" id="file" accept="image/png, image/jpeg" />
+                <Label for="foto">Foto</Label>
+                <Input type="file" name="foto" id="foto" onChange={this.onSelectImg} accept="image/png, image/jpeg" required />
                 {/* <FormText color="muted">
                   This is some placeholder block-level help text for the above input.
                   It's a bit lighter and easily wraps to a new line.
