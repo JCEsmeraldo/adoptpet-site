@@ -30,7 +30,7 @@ class Dashboard extends Component {
   petsCardList() {
     if (this.state.pets) {
         return this.state.pets.map((pets =>
-            <PetsCard key={pets.id} nome={pets.nome}/>
+            <PetsCard key={pets.id} nome={pets.nome} foto={pets.foto} id={pets.id} />
         ));
     } else {
         return

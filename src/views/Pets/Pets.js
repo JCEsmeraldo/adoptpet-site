@@ -80,6 +80,7 @@ class Pets extends Component {
   onSelectImg = (e) => {
     this.getBase64(e.target.files[0], (result) => {
         this.setState({ 'foto': result });
+        // console.log(result)
     });
     // this.setState({ [e.target.name]: e.target.files[0] });
   }
