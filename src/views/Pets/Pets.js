@@ -57,7 +57,7 @@ class Pets extends Component {
       porte: this.state.porte,
       genero: this.state.genero,
       descricao: this.state.descricao,
-      id_usuario: 1,
+      usuario_id: 1,
       foto : this.state.foto
     };
 
