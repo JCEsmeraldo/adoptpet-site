@@ -23,7 +23,7 @@ class Dashboard extends Component {
       console.log(this.state.pets)
     })
     .catch(function (error) {
-      console.log(":(")
+      console.log(":( ")
     })
   }
 
