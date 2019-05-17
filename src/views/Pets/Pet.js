@@ -1,101 +1,49 @@
 import React, { Component } from 'react';
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Button, Col } from 'reactstrap';
+import {Button, Col } from 'reactstrap';
+const axios = require('axios');
 
-const items = [
-  {
-    src: 'https://dogdaygetaway.com/wp-content/uploads/2017/03/adopt_rescue_dogs-800x400.jpg',
-  },
-  {
-    src: 'https://www.midliferambler.com/wp-content/uploads/2018/03/caninedementia-heading-800x400.jpg',
-  },
-  {
-    src: 'https://skovishpools.com/wp-content/uploads/2018/06/my-dog-in-my-pool-800x400.jpg',
-  }
-];
-
-
-class Animal extends Component {
+class Pet extends Component {
   constructor(props) {
     super(props)
-    this.state = { activeIndex: 0 };
-    this.next = this.next.bind(this);
-    this.previous = this.previous.bind(this);
-    this.goToIndex = this.goToIndex.bind(this);
-    this.onExiting = this.onExiting.bind(this);
-    this.onExited = this.onExited.bind(this);
+    this.state = {
+      pets: {}
+    }
   }
 
-  onExiting() {
-    this.animating = true;
+  componentDidMount(){
+    this.getPet()
   }
 
-  onExited() {
-    this.animating = false;
-  }
-
-  next() {
-    if (this.animating) return;
-    const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
-    this.setState({ activeIndex: nextIndex });
-  }
-
-  previous() {
-    if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
-    this.setState({ activeIndex: nextIndex });
-  }
-
-  goToIndex(newIndex) {
-    if (this.animating) return;
-    this.setState({ activeIndex: newIndex });
+  getPet() {
+    axios.get('https://adoptpet-api.herokuapp.com/pets/' + this.props.match.params.id)
+    .then(res => {
+      this.setState({pets: res.data})
+      console.log(res.data)
+    })
+    .catch(function (error) {
+      console.log(":(")
+    })
   }
 
   render() {
-    const { activeIndex } = this.state;
-
-    const slides = items.map((item) => {
-      return (
-        <CarouselItem
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-          key={item.src}
-        >
-          <img width="600px" src={item.src} alt={item.altText} />
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
-        </CarouselItem>
-      );
-    });
-
     return (
       <div className="animated fadeIn">
 
-        <br />
-
-        <Col xl="7">
-          <Carousel
-            activeIndex={activeIndex}
-            next={this.next}
-            previous={this.previous}
-          >
-            <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-            {slides}
-            <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-            <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-          </Carousel>
+        <Col xl={7}>
+          <img src={this.state.pets.foto} alt={this.state.pets.nome}/>
+          <br />
           <br />
           <h3>Nome:</h3>
-          <p>Luna</p>
-          <h3>Idade:</h3>
-          <p>6 meses</p>
-          <h3>Porte</h3>
-          <p>Médio</p>
+          <p>{this.state.pets.nome}</p>
+          <h3>Data de Nascimento:</h3>
+          <p>{this.state.pets.data_nasc}</p>
+          <h3>Porte:</h3>
+          <p>{this.state.pets.porte}</p>
           <Button color="primary" href="#">Adotar</Button>
-
         </Col>
       </div>
-    );
+    )
   }
 }
 
-
-export default Animal;
+export default Pet;
