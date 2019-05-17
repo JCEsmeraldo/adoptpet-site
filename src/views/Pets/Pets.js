@@ -138,6 +138,7 @@ class Pets extends Component {
                 <FormGroup>
                   <Label for="especie">Espécie</Label>
                   <Input type="select" name="especie" id="especie" onChange={this.onChange}>
+                    <option value="">Selecione uma espécie</option>
                     <option value="Cão">Cão</option>
                     <option value="Gato">Gato</option>
                     <option value="Passaro">Passaro</option>
@@ -148,6 +149,7 @@ class Pets extends Component {
                 <FormGroup>
                   <Label for="porte">Porte</Label>
                   <Input type="select" name="porte" id="porte" onChange={this.onChange}>
+                    <option value="">Selecione um porte</option>
                     <option value="Pequeno">Pequeno</option>
                     <option value="Medio">Médio</option>
                     <option value="Grande">Grande</option>
@@ -158,6 +160,7 @@ class Pets extends Component {
                 <FormGroup>
                   <Label for="genero">Gênero</Label>
                   <Input type="select" name="genero" id="genero" onChange={this.onChange}>
+                    <option value="">Selecione o gênero</option>
                     <option value="m">Macho</option>
                     <option value="f">Fêmea</option>
                   </Input>
