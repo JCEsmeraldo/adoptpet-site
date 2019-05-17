@@ -14,7 +14,11 @@ export default {
       url: '/pets',
       icon: 'fa fa-paw',
     },
-
+    {
+      name: 'Pedidos',
+      url: '/pedidos',
+      icon: 'icon-cloud-download',
+    },
     // {
     //   title: true,
     //   name: 'Theme',

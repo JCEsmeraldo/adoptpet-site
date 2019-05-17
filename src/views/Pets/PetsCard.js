@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Button, CardFooter, Col, CardText} from 'reactstrap';
-import { Link } from 'react-router-dom';
 class PetsCard extends Component {
 
   render() {
@@ -16,8 +15,8 @@ class PetsCard extends Component {
               <CardText>{this.props.nome}</CardText>
               {/* <CardText>{this.props.genero}</CardText> */}
             </CardFooter>
-            {/* <Link to={`/pets/pet/${this.props.id}`}>Saiba mais</Link> */}
-            <Button color="primary" href="#">Saiba mais</Button>
+              <Button color="primary" href="#/pets/:id" block>Saiba mais</Button>
+            {/* <Button color="primary" href="#">Saiba mais</Button> */}
           </Card>
         </Col>
     )

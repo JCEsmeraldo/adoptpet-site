@@ -36,6 +36,9 @@ const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 const Pets = React.lazy(() => import('./views/Pets/Pets'));
+const Pedidos = React.lazy(() => import('./views/Pedidos/Pedidos'));
+const Pet = React.lazy(() => import('./views/Pets/Pet'));
+
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -50,6 +53,8 @@ const routes = [
   { path: '/base/switches', name: 'Switches', component: Switches },
   { path: '/base/tables', name: 'Tables', component: Tables },
   { path: '/base/tabs', name: 'Pets', component: Tabs },
+  { path: '/base/tabs', name: 'Pedidos', component: Tabs },
+  { path: '/base/tabs', name: 'Pet', component: Tabs },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
   { path: '/base/carousels', name: 'Carousel', component: Carousels },
   { path: '/base/collapses', name: 'Collapse', component: Collapses },
@@ -81,6 +86,8 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/pets', exact: true,  name: 'Pets', component: Pets },
+  { path: '/pedidos', exact: true,  name: 'Pedidos em Andamento', component: Pedidos },
+  { path: '/pets/:id', exact: true,  name: 'Informações do Animal', component: Pet },
 ];
 
 export default routes;
