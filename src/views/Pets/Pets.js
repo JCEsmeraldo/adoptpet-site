@@ -89,7 +89,7 @@ class Pets extends Component {
   petsList() {
     if (this.state.pets) {
         return this.state.pets.map((pets =>
-            <PetsTable key={pets.id} nome={pets.nome}
+            <PetsTable key={pets.id} id={pets.id} nome={pets.nome}
             data_nasc={pets.data_nasc} genero={pets.genero} especie={pets.especie}/>
         ));
     } else {
