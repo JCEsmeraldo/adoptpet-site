@@ -48,7 +48,7 @@ class Pets extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault();
+    event.preventDefault(event);
 
     const pet = {
       nome: this.state.nome,
@@ -69,7 +69,8 @@ class Pets extends Component {
     .catch(function (error) {
       console.log(error);
     });
-    
+
+    window.location.reload();
   }
 
 
