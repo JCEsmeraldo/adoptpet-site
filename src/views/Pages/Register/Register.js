@@ -23,8 +23,8 @@ class Register extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault();
-
+    event.preventDefault(event);
+    
     const user = {
       nome: this.state.nome,
       email: this.state.email,
@@ -115,81 +115,11 @@ class Register extends Component {
                         {inputCpfCnpj}
                       </Col>
                     </Row>
-                    {/* <Row>
-                      <Col md={12} lg={3} xl={5}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="Rua"/>
-                        </InputGroup>
-                      </Col>
-                      <Col md={12} lg={3} xl={3}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="Bairro"/>
-                        </InputGroup>
-                      </Col>
-                      <Col md={12} lg={2} xl={2}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="Numero"/>
-                        </InputGroup>
-                      </Col>
-                      <Col md={12} lg={2} xl={2}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="Complemento"/>
-                        </InputGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md={12} lg={2} xl={3}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="Cidade"/>
-                        </InputGroup>
-                      </Col>
-                      <Col md={12} lg={2} xl={3}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="Estado"/>
-                        </InputGroup>
-                      </Col>
-                      <Col md={12} lg={2} xl={3}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="País"/>
-                        </InputGroup>
-                      </Col>
-                      <Col md={12} lg={2} xl={3}>
-                        <InputGroup className="mb-3">
-                          <InputGroupAddon addonType="prepend">
-                          </InputGroupAddon>
-                          <Input type="text" placeholder="Telefone"/>
-                        </InputGroup>
-                      </Col>
-                    </Row> */}
                     <Col md={12} lg={2} xl={{size: 4, offset: 4}}>
                       <Button type="submit" color="success" block>Inscreva-se</Button>
                     </Col>
                   </Form>
                 </CardBody>
-                {/* <CardFooter className="p-4">
-                  <Row>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-facebook mb-1" block><span>facebook</span></Button>
-                    </Col>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-twitter mb-1" block><span>twitter</span></Button>
-                    </Col>
-                  </Row>
-                </CardFooter> */}
               </Card>
             </Col>
           </Row >

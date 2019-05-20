@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Col } from 'reactstrap';
+import {Button, Col, Row, CardImg } from 'reactstrap';
 const axios = require('axios');
 
 class Pet extends Component {
@@ -26,21 +26,26 @@ class Pet extends Component {
   }
 
   render() {
+    const genero = this.state.pets.genero === "F" ? "Fêmea" : "Macho"
+
     return (
       <div className="animated fadeIn">
-
-        <Col xl={7}>
-          <img src={this.state.pets.foto} alt={this.state.pets.nome}/>
-          <br />
-          <br />
-          <h3>Nome:</h3>
-          <p>{this.state.pets.nome}</p>
-          <h3>Data de Nascimento:</h3>
-          <p>{this.state.pets.data_nasc}</p>
-          <h3>Porte:</h3>
-          <p>{this.state.pets.porte}</p>
-          <Button color="primary" href="#">Adotar</Button>
-        </Col>
+        <Row>
+          <Col xl={{size: 5}}>
+            <CardImg width="100%" height="100%" src={this.state.pets.foto} alt={this.state.pets.nome}/>
+          </Col>
+          <Col xl={{size: 6}}>
+            <h4>Nome:</h4>
+            <p>{this.state.pets.nome}</p>
+            <h4>Gênero:</h4>
+            <p>{genero}</p>
+            <h3>Data de Nascimento:</h3>
+            <p>{this.state.pets.data_nasc}</p>
+            <h3>Porte:</h3>
+            <p>{this.state.pets.porte}</p>
+            <Button color="primary" href="#">Adotar</Button>
+          </Col>
+        </Row>
       </div>
     )
   }
