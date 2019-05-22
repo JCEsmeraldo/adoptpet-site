@@ -80,7 +80,7 @@ class Register extends Component {
                               <i className="icon-user"></i>
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input name="nome" type="text" onChange={this.onChange} placeholder="Nome" autoComplete="nome" />
+                          <Input required name="nome" type="text" onChange={this.onChange} placeholder="Nome" autoComplete="nome" />
                         </InputGroup>
                       </Col>
                       <Col md={12} lg={4} xl={12}>
@@ -88,7 +88,7 @@ class Register extends Component {
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>@</InputGroupText>
                           </InputGroupAddon>
-                          <Input name="email" type="text" onChange={this.onChange} placeholder="Email" autoComplete="email" />
+                          <Input required name="email" type="text" onChange={this.onChange} placeholder="Email" autoComplete="email" />
                         </InputGroup>
                       </Col>
                       <Col md={12} lg={4} xl={12}>
@@ -98,14 +98,14 @@ class Register extends Component {
                               <i className="icon-lock"></i>
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input name="senha" type="password" onChange={this.onChange} placeholder="Senha" autoComplete="new-password" />
+                          <Input required name="senha" type="password" onChange={this.onChange} placeholder="Senha" autoComplete="new-password" />
                         </InputGroup>
                       </Col>
                     </Row>
                     <Row>
                       <Col md={12} lg={2} xl={4}>
                         <FormGroup>
-                          <Input value={this.state.selectType} type="select" name="select" id="select" onChange={this._handleChange}>
+                          <Input required value={this.state.selectType} type="select" name="select" id="select" onChange={this._handleChange}>
                             <option value="cpf">CPF</option>
                             <option value="cnpj">CNPJ</option>
                           </Input>

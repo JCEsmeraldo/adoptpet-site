@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader, Col, Table } from 'reactstrap';
 import PedidosTable from './PedidosTable';
 
 const axios = require('axios');
+const jwtDecode = require('jwt-decode');
 
 class Pedidos extends Component {
   constructor(props) {
@@ -19,14 +20,26 @@ class Pedidos extends Component {
   
 
   componentDidMount() {
-    this.findAllPedidos()
+    let token = localStorage.getItem('token');
+    if(token != null){
+      let token = localStorage.getItem('token');
+      var decoded = jwtDecode(token);
+      // console.log(decoded.user_id);
+      // console.log(token)
+      this.findAllPedidos(decoded.user_id)
+    }else{
+      // console.log("Sem token")
+      // this.setState({menu: "Entrar"})
+    }
+
+    
   }
 
-  findAllPedidos() {
-    axios.get('https://adoptpet-api.herokuapp.com/usuarios/pedidos_pendentes/1')
+  findAllPedidos(_id) {
+    axios.get('https://adoptpet-api.herokuapp.com/usuarios/pedidos_pendentes/' + _id)
     .then(res => {
       this.setState({pedidos: res.data})
-       console.log(this.state.pedidos)
+      //  console.log(this.state.pedidos)
     })
     .catch(function (error) {
       console.log(":(")

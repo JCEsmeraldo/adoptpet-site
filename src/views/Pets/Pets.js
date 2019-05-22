@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table, Button, Modal, ModalBody, ModalHeader, ModalFooter,
+import { Card, CardBody, Form, CardHeader, Col, Row, Table, Button, Modal, ModalBody, ModalHeader, ModalFooter,
 Input, InputGroup, FormGroup, Label } from 'reactstrap';
 import PetsTable from './PetsTable';
 
 const axios = require('axios');
+const jwtDecode = require('jwt-decode');
 
 class Pets extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Pets extends Component {
       genero : '',
       descricao : '',
       foto : '',
+      usuario_id : null
     }
   }
 
@@ -33,11 +35,20 @@ class Pets extends Component {
 }
 
   componentDidMount() {
-    this.findAllPets()
+    let token = localStorage.getItem('token');
+    if(token != null){
+      var decoded = jwtDecode(token);
+      this.setState({usuario_id : decoded.user_id})
+      // console.log(decoded.user_id)
+      this.findAllPets(decoded.user_id)
+    }else{
+      // console.log("Sem token")
+      // this.setState({menu: "Entrar"})
+    }
   }
 
-  findAllPets() {
-    axios.get('https://adoptpet-api.herokuapp.com/pets/usuarios/1')
+  findAllPets(_id) {
+    axios.get('https://adoptpet-api.herokuapp.com/pets/usuarios/' + _id)
     .then(res => {
       this.setState({pets: res.data})
       // console.log(this.state.pets)
@@ -57,7 +68,7 @@ class Pets extends Component {
       porte: this.state.porte,
       genero: this.state.genero,
       descricao: this.state.descricao,
-      usuario_id: 1,
+      usuario_id: this.state.usuario_id,
       foto : this.state.foto
     };
 
@@ -65,12 +76,13 @@ class Pets extends Component {
     axios.post('https://adoptpet-api.herokuapp.com/pets/', pet)
     .then(function (response) {
       console.log(response.data);
+      window.location.reload();
     })
     .catch(function (error) {
       console.log(error);
     });
 
-    window.location.reload();
+    
   }
 
 
@@ -99,9 +111,14 @@ class Pets extends Component {
   }
 
   toggle = () => {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
+    if(this.state.usuario_id != null){
+      this.setState(prevState => ({
+        modal: !prevState.modal
+      }));
+    }else{
+      alert("Para cadastrar um pet é preciso fazer login!")
+    }
+    
   }
 
   render() {
@@ -116,77 +133,80 @@ class Pets extends Component {
         </Row>
         <br/>
         <Modal  isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Adicione seu novo Pet</ModalHeader>
-          <ModalBody>
-            <Row form>
-              <Col md={12} lg={4} xl={7}>
-                <InputGroup className="mb-3">
-                  {/* <InputGroupText>
-                    {<i className="icon-user"></i>}
-                  </InputGroupText> */}
-                  <Input name="nome" type="text" onChange={this.onChange} placeholder="Nome" autoComplete="nome" />
-                </InputGroup>
-              </Col>
-              <Col md={12} lg={4} xl={5}>
-                <InputGroup className="mb-3">
-                  {/* <InputGroupText>
-                    {<i className="icon-user"></i>}
-                  </InputGroupText> */}
-                  <Input name="data_nasc" type="date" onChange={this.onChange} autoComplete="data_nasc" />
-                </InputGroup>
-              </Col>
-              <Col md={12} lg={2} xl={5}>
+          <Form onSubmit={this.handleSubmit}>
+            <ModalHeader toggle={this.toggle}>Adicione seu novo Pet</ModalHeader>
+            <ModalBody>
+              <Row form>
+              
+                <Col md={12} lg={4} xl={7}>
+                  <InputGroup className="mb-3">
+                    {/* <InputGroupText>
+                      {<i className="icon-user"></i>}
+                    </InputGroupText> */}
+                    <Input required name="nome" type="text" onChange={this.onChange} placeholder="Nome" autoComplete="nome" />
+                  </InputGroup>
+                </Col>
+                <Col md={12} lg={4} xl={5}>
+                  <InputGroup className="mb-3">
+                    {/* <InputGroupText>
+                      {<i className="icon-user"></i>}
+                    </InputGroupText> */}
+                    <Input name="data_nasc" type="date" onChange={this.onChange} autoComplete="data_nasc" />
+                  </InputGroup>
+                </Col>
+                <Col md={12} lg={2} xl={5}>
+                  <FormGroup>
+                    <Label for="especie">Espécie</Label>
+                    <Input required type="select" name="especie" id="especie" onChange={this.onChange}>
+                      <option value="">Selecione uma espécie</option>
+                      <option value="Cão">Cão</option>
+                      <option value="Gato">Gato</option>
+                      <option value="Passaro">Passaro</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md={12} lg={2} xl={4}>
+                  <FormGroup>
+                    <Label for="porte">Porte</Label>
+                    <Input required type="select" name="porte" id="porte" onChange={this.onChange}>
+                      <option value="">Selecione um porte</option>
+                      <option value="Pequeno">Pequeno</option>
+                      <option value="Medio">Médio</option>
+                      <option value="Grande">Grande</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md={12} lg={2} xl={3}>
+                  <FormGroup>
+                    <Label for="genero">Gênero</Label>
+                    <Input required type="select" name="genero" id="genero" onChange={this.onChange}>
+                      <option value="">Selecione o gênero</option>
+                      <option value="M">Macho</option>
+                      <option value="F">Fêmea</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md={12} lg={4} xl={12}>
+                  <FormGroup>
+                    <Input required type="textarea" name="descricao" onChange={this.onChange} placeholder="Descrição" id="descricao"/>
+                  </FormGroup>
+                </Col>
+                <Col md={12} lg={4} xl={12}>
                 <FormGroup>
-                  <Label for="especie">Espécie</Label>
-                  <Input type="select" name="especie" id="especie" onChange={this.onChange}>
-                    <option value="">Selecione uma espécie</option>
-                    <option value="Cão">Cão</option>
-                    <option value="Gato">Gato</option>
-                    <option value="Passaro">Passaro</option>
-                  </Input>
+                  <Label for="foto">Foto</Label>
+                  <Input type="file" name="foto" id="foto" onChange={this.onSelectImg} accept="image/png, image/jpeg" required />
+                  {/* <FormText color="muted">
+                    This is some placeholder block-level help text for the above input.
+                    It's a bit lighter and easily wraps to a new line.
+                  </FormText> */}
                 </FormGroup>
-              </Col>
-              <Col md={12} lg={2} xl={4}>
-                <FormGroup>
-                  <Label for="porte">Porte</Label>
-                  <Input type="select" name="porte" id="porte" onChange={this.onChange}>
-                    <option value="">Selecione um porte</option>
-                    <option value="Pequeno">Pequeno</option>
-                    <option value="Medio">Médio</option>
-                    <option value="Grande">Grande</option>
-                  </Input>
-                </FormGroup>
-              </Col>
-              <Col md={12} lg={2} xl={3}>
-                <FormGroup>
-                  <Label for="genero">Gênero</Label>
-                  <Input type="select" name="genero" id="genero" onChange={this.onChange}>
-                    <option value="">Selecione o gênero</option>
-                    <option value="m">Macho</option>
-                    <option value="f">Fêmea</option>
-                  </Input>
-                </FormGroup>
-              </Col>
-              <Col md={12} lg={4} xl={12}>
-                <FormGroup>
-                  <Input type="textarea" name="descricao" onChange={this.onChange} placeholder="Descrição" id="descricao"/>
-                </FormGroup>
-              </Col>
-              <Col md={12} lg={4} xl={12}>
-              <FormGroup>
-                <Label for="foto">Foto</Label>
-                <Input type="file" name="foto" id="foto" onChange={this.onSelectImg} accept="image/png, image/jpeg" required />
-                {/* <FormText color="muted">
-                  This is some placeholder block-level help text for the above input.
-                  It's a bit lighter and easily wraps to a new line.
-                </FormText> */}
-              </FormGroup>
-              </Col>
-            </Row>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="success" onClick={this.handleSubmit}>Adicionar</Button>
-          </ModalFooter>
+                </Col>
+              </Row>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" color="success">Adicionar</Button>
+            </ModalFooter>
+          </Form>
         </Modal>
         <Row>
           <Col lg={12}>

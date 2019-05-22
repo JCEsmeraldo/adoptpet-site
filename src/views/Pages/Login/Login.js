@@ -17,6 +17,10 @@ class Login extends Component {
     }
   }
 
+  componentDidMount(){
+    localStorage.removeItem('token');
+  }
+
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -28,21 +32,22 @@ class Login extends Component {
       email: this.state.email,
       senha: this.state.senha,
     };
-    console.log(user);
+    // console.log(user);
     
-    axios.post('https://adoptpet-api.herokuapp.com/login/', user)
+    axios.post('https://adoptpet-api.herokuapp.com/login', user)
     .then(function (response) {
-      console.log(response.data[0]);
+      console.log(response.data);
+      if(response.data.token){
+        // const token = response.data.token
+        localStorage.setItem('token', response.data.token);
+        window.location.href = "http://localhost:3001/#/dashboard";
+      }else{ alert("Email ou senha invalido")}
+      
     })
     .catch(function (error) {
+      alert("Email ou senha invalido")
       console.log(error);
     });
-    // axios({
-    //   method: 'post',
-    //   url: 'https://adoptpet-api.herokuapp.com/login/',
-    //   data: user
-    // });
-    
   }
 
   render() {
