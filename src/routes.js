@@ -33,7 +33,8 @@ const Modals = React.lazy(() => import('./views/Notifications/Modals'));
 const Colors = React.lazy(() => import('./views/Theme/Colors'));
 const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
-const Users = React.lazy(() => import('./views/Users/Users'));
+// const Users = React.lazy(() => import('./views/Users/Users'));
+const UserEdit = React.lazy(() => import('./views/Users/UserEdit'));
 const User = React.lazy(() => import('./views/Users/User'));
 const Pets = React.lazy(() => import('./views/Pets/Pets'));
 const Pedidos = React.lazy(() => import('./views/Pedidos/Pedidos'));
@@ -83,7 +84,7 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/users/', exact: true,  name: 'Edite seu Perfil', component: UserEdit },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/pets', exact: true,  name: 'Pets', component: Pets },
   { path: '/pedidos', exact: true,  name: 'Pedidos em Andamento', component: Pedidos },

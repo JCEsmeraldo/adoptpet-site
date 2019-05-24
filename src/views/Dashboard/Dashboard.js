@@ -57,7 +57,7 @@ class Dashboard extends Component {
   render() {
     const petsCard = this.petsCardList()
     // console.log(this.state.titulo)
-    const botao = this.state.token ? "" : [(<Button href="#/login" color="primary">Entre ou Cadastre-se</Button>)]
+    const botao = this.state.token ? "" : [(<Button key="" href="#/login" color="primary">Entre ou Cadastre-se</Button>)]
     return (
       <div className="animated fadeIn">
           <Jumbotron>

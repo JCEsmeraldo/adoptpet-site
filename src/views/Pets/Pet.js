@@ -30,7 +30,7 @@ class Pet extends Component {
 
     return (
       <div className="animated fadeIn">
-        <Row>
+        <Row form>
           <Col xl={{size: 5}}>
             <CardImg width="100%" height="100%" src={this.state.pets.foto} alt={this.state.pets.nome}/>
           </Col>
@@ -43,7 +43,7 @@ class Pet extends Component {
             <p>{this.state.pets.data_nasc}</p>
             <h3>Porte:</h3>
             <p>{this.state.pets.porte}</p>
-            <Button color="primary" href="#">Adotar</Button>
+            <Button color="primary" onClick={this.handleSubmit}>Adotar</Button>
           </Col>
         </Row>
       </div>
