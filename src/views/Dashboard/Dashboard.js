@@ -34,10 +34,10 @@ class Dashboard extends Component {
   }
 
   findAllPets() {
-    axios.get('https://adoptpet-api.herokuapp.com/pets')
+    axios.get('https://adoptpet-api.herokuapp.com/pets_disponiveis')
     .then(res => {
       this.setState({pets: res.data})
-      console.log(this.state.pets)
+      // console.log(this.state.pets)
     })
     .catch(function (error) {
       console.log(":( ")

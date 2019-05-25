@@ -1,29 +1,66 @@
 import React, { Component } from 'react';
 import {Button, Col, Row, CardImg } from 'reactstrap';
 const axios = require('axios');
+const jwtDecode = require('jwt-decode');
 
 class Pet extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pets: {}
+      pets: {},
+      // usuario_id : null
     }
   }
 
   componentDidMount(){
+    let token = localStorage.getItem('token');
+    if(token != null){
+      var decoded = jwtDecode(token);
+      this.setState({usuario_id : decoded.user_id})
+      // console.log(decoded.user_id)
+    }
     this.getPet()
   }
+
+  
 
   getPet() {
     axios.get('https://adoptpet-api.herokuapp.com/pets/' + this.props.match.params.id)
     .then(res => {
       this.setState({pets: res.data})
-      console.log(res.data)
+      // console.log(this.state.pets)
     })
     .catch(function (error) {
       console.log(":(")
     })
   }
+
+  adotar = () => {
+    if(this.state.usuario_id != null){
+      const pedido = {
+        pet_id: this.state.pets.id,
+        usuario_id : this.state.usuario_id,
+        status : 'Pendente'
+      };
+  
+      // console.log(pedido);
+      axios.post('https://adoptpet-api.herokuapp.com/pedidos/', pedido)
+      .then(function (response) {
+        console.log(response.data)
+        window.location.href = "http://localhost:3001/#/dashboard";
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert(error)
+      });
+
+    }else{
+      alert("Para adotar um pet é preciso fazer login!")
+    }
+    
+  }
+
+  
 
   render() {
     const genero = this.state.pets.genero === "F" ? "Fêmea" : "Macho"
@@ -43,7 +80,7 @@ class Pet extends Component {
             <p>{this.state.pets.data_nasc}</p>
             <h3>Porte:</h3>
             <p>{this.state.pets.porte}</p>
-            <Button color="primary" onClick={this.handleSubmit}>Adotar</Button>
+            <Button color="primary" onClick={this.adotar}>Adotar</Button>
           </Col>
         </Row>
       </div>

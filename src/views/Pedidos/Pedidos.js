@@ -52,7 +52,7 @@ class Pedidos extends Component {
     if (this.state.pedidos) {
         return this.state.pedidos.map((pedidos =>
             <PedidosTable key={pedidos.id} nome={pedidos.nome_pet}
-            nome_usuario={pedidos.nome_usuario}/>
+            nome_usuario={pedidos.nome_usuario} email_usuario={pedidos.email_usuario}/>
         ));
     } else {
         return
@@ -80,8 +80,9 @@ class Pedidos extends Component {
                 <Table>
                   <thead>
                       <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Usuario</th>
+                        <th scope="col">Pet</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Email</th>
                         {<th scope="col"></th>}
                       </tr>
                     </thead>

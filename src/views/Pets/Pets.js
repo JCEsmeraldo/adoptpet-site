@@ -75,11 +75,12 @@ class Pets extends Component {
     console.log(pet);
     axios.post('https://adoptpet-api.herokuapp.com/pets/', pet)
     .then(function (response) {
-      console.log(response.data);
+      // console.log(response.data);
       window.location.reload();
     })
     .catch(function (error) {
       console.log(error);
+      alert(error)
     });
 
     

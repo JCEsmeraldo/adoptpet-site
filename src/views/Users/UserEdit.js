@@ -19,7 +19,18 @@ class UserEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      usuario: {}
+      nome : '',
+      email : '',
+      senha : '',
+      cpfcnpj : '',
+      pais : '',
+      estado : '',
+      cidade : '',
+      bairro : '',
+      rua : '',
+      numero : '',
+      complemento : '',
+      telefone : ''
     }
   }
 
@@ -30,29 +41,40 @@ class UserEdit extends React.Component {
       var decoded = jwtDecode(token);
       // console.log(decoded.user_id);
       // console.log(token)
-      this.getUsuarioId(decoded.user_id)
+      this.getUsuario(decoded.user_id)
     }else{
       // console.log("Sem token")
       // this.setState({menu: "Entrar"})
     }
   }
 
-  getUsuarioId(_id) {
+  getUsuario(_id) {
     axios.get('https://adoptpet-api.herokuapp.com/usuarios/' + _id)
     .then(res => {
-      this.setState({usuario: res.data})
-      console.log(res.data)
+      this.setState(res.data)
+      // console.log(res.data)
     })
     .catch(function (error) {
       console.log(":(")
     })
   }
 
+  handleSubmit = event => {
+    event.preventDefault(event);
+    // console.log(this.state.id);
+    axios.put('https://adoptpet-api.herokuapp.com/usuarios/' + this.state.id, this.state)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
   _handleChange = event => {
     event.preventDefault()
     this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.value)
-
   }
 
 
@@ -62,11 +84,12 @@ class UserEdit extends React.Component {
         <Row>
           <Col md={{size: 6, offset: 3}}>
             <Card>
+            <Form onSubmit={this.handleSubmit}>
               <CardHeader>
                 <h5 className="title">Editar Informações</h5>
               </CardHeader>
               <CardBody>
-                <Form>
+                
                   <Row>
                     <Col className="px-md-3" md="12">
                       <FormGroup>
@@ -74,7 +97,7 @@ class UserEdit extends React.Component {
                         <Input
                           type="text"
                           onChange = {this._handleChange}
-                          value={this.state.usuario.nome}
+                          defaultValue={this.state.nome}
                           name="nome"
                         />
                       </FormGroup>
@@ -85,7 +108,7 @@ class UserEdit extends React.Component {
                           Email 
                         </label>
                         <Input 
-                          value={this.state.usuario.email}
+                          defaultValue={this.state.email} readOnly
                           type="email" />
                       </FormGroup>
                     </Col>
@@ -95,7 +118,7 @@ class UserEdit extends React.Component {
                         <FormGroup>
                           <label>CPF</label>
                           <Input
-                            value={this.state.usuario.cpf_cnpj}
+                            defaultValue={this.state.cpf_cnpj}
                             placeholder="CPF"
                             type="text"
                           />
@@ -105,20 +128,21 @@ class UserEdit extends React.Component {
                         <FormGroup>
                           <label>Senha</label>
                           <Input
-                            value={this.state.usuario.senha}
+                            defaultValue={this.state.senha}
                             placeholder="Senha"
-                            type="text"
+                            type="password"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
-                </Form>
+                
               </CardBody>
               <CardFooter>
                 <Button className="btn-fill" color="primary" type="submit">
-                  Save
+                  Salvar
                 </Button>
               </CardFooter>
+              </Form>
             </Card>
           </Col>
         </Row>
