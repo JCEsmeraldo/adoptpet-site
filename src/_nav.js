@@ -3,7 +3,7 @@ export default {
     {
       name: 'Dashboard',
       url: '/dashboard',
-      icon: 'icon-speedometer',
+      icon: 'fa fa-dashboard',
       badge: {
         variant: 'info'
         // text: 'NEW',
@@ -17,7 +17,12 @@ export default {
     {
       name: 'Pedidos',
       url: '/pedidos',
-      icon: 'icon-cloud-download',
+      icon: 'fa fa-check',
+    },
+    {
+      name: 'Pets Adotados',
+      url: '/adotados',
+      icon: 'fa fa-heart',
     },
     // {
     //   title: true,

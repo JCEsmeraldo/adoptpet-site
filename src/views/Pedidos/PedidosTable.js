@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from 'reactstrap';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 class PedidosTable extends Component {
@@ -8,20 +9,24 @@ class PedidosTable extends Component {
         status : _resposta
       };
   
-      axios.put('https://adoptpet-api.herokuapp.com/pedidos/'+_id, pedido)
+      axios.put('https://adoptpet-api.herokuapp.com/pedidos_resposta/'+_id, pedido)
       .then(function (response) {
         console.log(response.data)
         window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
-        alert(error)
+        // alert(error)
       });
   }
   render() {
     return (
       <tr>
-        <td>{this.props.nome}</td>
+        <td>
+        <Link to={`/pet/${this.props.idPet}`}>
+          {this.props.nome}
+        </Link>
+        </td>
         <td>{this.props.nome_usuario}</td>
         <td>{this.props.email_usuario}</td>
         {<td><Button  onClick={this.responder.bind(this, this.props.id,"Aprovado")} color="success">Aceitar</Button>

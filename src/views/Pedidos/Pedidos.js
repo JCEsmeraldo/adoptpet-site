@@ -51,7 +51,7 @@ class Pedidos extends Component {
   pedidosList() {
     if (this.state.pedidos) {
         return this.state.pedidos.map((pedidos =>
-            <PedidosTable key={pedidos.id} id={pedidos.id} nome={pedidos.nome_pet}
+            <PedidosTable key={pedidos.id} id={pedidos.id} idPet={pedidos.pet_id} nome={pedidos.nome_pet}
             nome_usuario={pedidos.nome_usuario} email_usuario={pedidos.email_usuario}/>
         ));
     } else {

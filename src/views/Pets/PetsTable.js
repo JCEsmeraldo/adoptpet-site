@@ -7,7 +7,7 @@ class PetsTable extends Component {
     return (
       <tr> 
         <td>
-        <Link to={`/pets/${this.props.id}`}>
+        <Link to={`/pet/${this.props.id}`}>
           {this.props.nome}
         </Link>
         </td>

@@ -37,23 +37,27 @@ class Pet extends Component {
 
   adotar = () => {
     if(this.state.usuario_id != null){
-      const pedido = {
-        pet_id: this.state.pets.id,
-        usuario_id : this.state.usuario_id,
-        status : 'Pendente'
-      };
-  
-      // console.log(pedido);
-      axios.post('https://adoptpet-api.herokuapp.com/pedidos/', pedido)
-      .then(function (response) {
-        console.log(response.data)
-        window.location.href = "http://localhost:3001/#/dashboard";
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert(error)
-      });
-
+      if(this.state.usuario_id !== this.state.pets.usuario_id){
+        const pedido = {
+          pet_id: this.state.pets.id,
+          usuario_id : this.state.usuario_id,
+          status : 'Pendente'
+        };
+    
+        // console.log(pedido);
+        axios.post('https://adoptpet-api.herokuapp.com/pedidos/', pedido)
+        .then(function (response) {
+          console.log(response.data)
+          window.location.href = "http://localhost:3001/#/dashboard";
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert(error)
+        });  
+      }else{
+        alert("Você não pode adotar seu próprio pet")
+      }
+      
     }else{
       alert("Para adotar um pet é preciso fazer login!")
     }

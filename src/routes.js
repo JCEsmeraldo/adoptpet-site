@@ -39,6 +39,7 @@ const User = React.lazy(() => import('./views/Users/User'));
 const Pets = React.lazy(() => import('./views/Pets/Pets'));
 const Pedidos = React.lazy(() => import('./views/Pedidos/Pedidos'));
 const Pet = React.lazy(() => import('./views/Pets/Pet'));
+const PetsAdotados = React.lazy(() => import('./views/Pets/PetsAdotados'));
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -87,8 +88,9 @@ const routes = [
   { path: '/users/', exact: true,  name: 'Edite seu Perfil', component: UserEdit },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/pets', exact: true,  name: 'Pets', component: Pets },
+  { path: '/adotados', exact: true,  name: 'Pets Adotados', component: PetsAdotados },
   { path: '/pedidos', exact: true,  name: 'Pedidos em Andamento', component: Pedidos },
-  { path: '/pets/:id', exact: true,  name: 'Informações do Animal', component: Pet },
+  { path: '/pet/:id', exact: true,  name: 'Informações do Animal', component: Pet },
 ];
 
 export default routes;

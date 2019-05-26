@@ -17,7 +17,7 @@ class PetsCard extends Component {
               <CardText>{this.props.nome}</CardText>
               {/* <CardText>{this.props.genero}</CardText> */}
             </CardFooter>
-            <Link to={`/pets/${this.props.id}`}>
+            <Link to={`/pet/${this.props.id}`}>
               <Button color="primary" block>Saiba mais</Button>
             </Link>
             {/* <Button color="primary" href="#">Saiba mais</Button> */}
