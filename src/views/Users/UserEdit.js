@@ -108,6 +108,8 @@ class UserEdit extends React.Component {
                           Email 
                         </label>
                         <Input 
+                          name="email"
+                          onChange = {this._handleChange}
                           defaultValue={this.state.email} readOnly
                           type="email" />
                       </FormGroup>
@@ -118,6 +120,8 @@ class UserEdit extends React.Component {
                         <FormGroup>
                           <label>CPF</label>
                           <Input
+                            name="cpf"
+                            onChange = {this._handleChange}
                             defaultValue={this.state.cpf_cnpj}
                             placeholder="CPF"
                             type="text"
@@ -128,6 +132,8 @@ class UserEdit extends React.Component {
                         <FormGroup>
                           <label>Senha</label>
                           <Input
+                            name="password"
+                            onChange = {this._handleChange}
                             defaultValue={this.state.senha}
                             placeholder="Senha"
                             type="password"

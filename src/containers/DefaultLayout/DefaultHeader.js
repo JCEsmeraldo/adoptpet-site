@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Nav, NavItem } from 'reactstrap';
 import PropTypes from 'prop-types';
-
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.png'
 import sygnet from '../../assets/img/brand/logo-amarelo.png'
@@ -18,6 +17,7 @@ class DefaultHeader extends Component {
     super(props)
     this.state = {
       menu : '',
+      perfil: ''
     }
   }
 
@@ -25,6 +25,7 @@ class DefaultHeader extends Component {
     let token = localStorage.getItem('token');
     if(token != null){
       // console.log("Token")
+      this.setState({perfil: "Editar Perfil"})
       this.setState({menu: "Sair"})
     }else{
       // console.log("Sem token")
@@ -50,10 +51,7 @@ class DefaultHeader extends Component {
 
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <NavLink to="/dashboard" className="nav-link" >Dashboard</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <Link to="/users" className="nav-link">Editar Perfil</Link>
+              <NavLink to="/dashboard" className="nav-link text-primary" >Dashboard</NavLink>
           </NavItem>
           {/* <NavItem className="px-3">
             <NavLink to="#" className="nav-link">Settings</NavLink>
@@ -66,8 +64,11 @@ class DefaultHeader extends Component {
           {/* <NavItem className="d-md-down-none">
             <NavLink to="#" className="nav-link"><i className="icon-list"></i></NavLink>
           </NavItem> */}
-          <NavItem className="d-md-down-none">
-            <NavLink to="/login" className="nav-link">  {this.state.menu}</NavLink>
+          <NavItem className="px-3">
+            <Link to="/users" className="nav-link text-primary">{this.state.perfil}</Link>
+          </NavItem>
+          <NavItem className="px-3">
+            <NavLink to="/login" className="nav-link text-primary">{this.state.menu}</NavLink>
           </NavItem>
           {/* <AppHeaderDropdown direction='down'>
             <DropdownToggle nav>
