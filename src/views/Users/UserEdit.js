@@ -120,7 +120,7 @@ class UserEdit extends React.Component {
                         <FormGroup>
                           <label>CPF</label>
                           <Input
-                            name="cpf"
+                            name="cpf_cnpj"
                             onChange = {this._handleChange}
                             defaultValue={this.state.cpf_cnpj}
                             placeholder="CPF"
@@ -132,7 +132,7 @@ class UserEdit extends React.Component {
                         <FormGroup>
                           <label>Senha</label>
                           <Input
-                            name="password"
+                            name="senha"
                             onChange = {this._handleChange}
                             defaultValue={this.state.senha}
                             placeholder="Senha"

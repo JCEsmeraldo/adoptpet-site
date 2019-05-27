@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 const axios = require('axios');
 
+
 class Login extends Component {
 
   constructor(props){
@@ -81,22 +82,22 @@ class Login extends Component {
                       </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button type="submit" color="primary" className="px-4">Login</Button>
+                          <Button style={{ backgroundColor: '#090827', borderColor: '#090827' }} color="primary" type="submit" className="px-4">Login</Button>
                         </Col>
                         <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Esqueceu a senha?</Button>
+                          <Button style ={{fontWeight: 'bold', textDecorationLine:'underline'}} color="blue" className="px-0">Esqueceu a senha?</Button>
                         </Col>
                       </Row>
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+                <Card className="text-white py-5 d-md-down-none" style={{backgroundColor: '#090827', borderColor: '#090827', width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
                       <h2>Cadastre-se</h2>
                       <p>Faça seu cadastro e ajude-nos a encontrar um lar para um de nossos pets!</p>
                       <Link to="/register">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>Clique Aqui</Button>
+                        <Button style={{ backgroundColor: '#fff627', borderColor: '#090827' }} color="blue" className="mt-3" active tabIndex={-1}>Clique Aqui</Button>
                       </Link>
                     </div>
                   </CardBody>

@@ -40,6 +40,7 @@ const Pets = React.lazy(() => import('./views/Pets/Pets'));
 const Pedidos = React.lazy(() => import('./views/Pedidos/Pedidos'));
 const Pet = React.lazy(() => import('./views/Pets/Pet'));
 const PetsAdotados = React.lazy(() => import('./views/Pets/PetsAdotados'));
+const Veterinarios = React.lazy(() => import('./views/Veterinarios/Veterinarios'));
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -91,6 +92,7 @@ const routes = [
   { path: '/adotados', exact: true,  name: 'Pets Adotados', component: PetsAdotados },
   { path: '/pedidos', exact: true,  name: 'Pedidos em Andamento', component: Pedidos },
   { path: '/pet/:id', exact: true,  name: 'Informações do Animal', component: Pet },
+  { path: '/veterinarios', exact: true,  name: 'Veterinários', component: Veterinarios }, 
 ];
 
 export default routes;

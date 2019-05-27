@@ -24,6 +24,12 @@ export default {
       url: '/adotados',
       icon: 'fa fa-heart',
     },
+    {
+      name: 'Veterinários',
+      url: '/veterinarios',
+      icon: 'fa fa-phone',
+    },
+
     // {
     //   title: true,
     //   name: 'Theme',
