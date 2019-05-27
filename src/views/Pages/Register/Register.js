@@ -56,10 +56,10 @@ class Register extends Component {
 
     if(this.state.selectType === "cpf") {
       console.log('cpf')
-      inputCpfCnpj = <Input name="cpfcnpj" onChange={this.onChange} type="text" placeholder="CPF"/>
+      inputCpfCnpj = <Input name="cpfcnpj" onChange={this.onChange} type="number" placeholder="CPF"/>
     } else {
       console.log('cnpj')
-      inputCpfCnpj = <Input name="cpfcnpj" onChange={this.onChange} type="text" placeholder="CNPJ"/>
+      inputCpfCnpj = <Input name="cpfcnpj" onChange={this.onChange} type="number" placeholder="CNPJ"/>
     }
     
     return (
@@ -98,7 +98,7 @@ class Register extends Component {
                               <i className="icon-lock"></i>
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input required name="senha" type="password" onChange={this.onChange} placeholder="Senha" autoComplete="new-password" />
+                          <Input required minLength="6" name="senha" type="password" onChange={this.onChange} placeholder="Senha" autoComplete="new-password" />
                         </InputGroup>
                       </Col>
                     </Row>
