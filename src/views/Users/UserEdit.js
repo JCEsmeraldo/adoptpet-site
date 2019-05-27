@@ -49,7 +49,7 @@ class UserEdit extends React.Component {
   }
 
   getUsuario(_id) {
-    axios.get('https://adoptpet-api.herokuapp.com/usuarios/' + _id)
+    axios.get('http://localhost:3000/usuarios/' + _id)
     .then(res => {
       this.setState(res.data)
       // console.log(res.data)
@@ -62,7 +62,7 @@ class UserEdit extends React.Component {
   handleSubmit = event => {
     event.preventDefault(event);
     // console.log(this.state.id);
-    axios.put('https://adoptpet-api.herokuapp.com/usuarios/' + this.state.id, this.state)
+    axios.put('http://localhost:3000/usuarios/' + this.state.id, this.state)
     .then(function (response) {
       console.log(response);
     })

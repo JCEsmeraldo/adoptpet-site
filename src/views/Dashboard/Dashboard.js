@@ -34,7 +34,7 @@ class Dashboard extends Component {
   }
 
   findAllPets() {
-    axios.get('https://adoptpet-api.herokuapp.com/pets_disponiveis')
+    axios.get('http://localhost:3000/pets_disponiveis')
     .then(res => {
       this.setState({pets: res.data})
       // console.log(this.state.pets)

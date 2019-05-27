@@ -36,7 +36,7 @@ class Pedidos extends Component {
   }
 
   findAllPedidos(_id) {
-    axios.get('https://adoptpet-api.herokuapp.com/usuarios/pedidos_pendentes/' + _id)
+    axios.get('http://localhost:3000/usuarios/pedidos_pendentes/' + _id)
     .then(res => {
       this.setState({pedidos: res.data})
       //  console.log(this.state.pedidos)

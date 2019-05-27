@@ -34,7 +34,7 @@ class Login extends Component {
     };
     // console.log(user);
     
-    axios.post('https://adoptpet-api.herokuapp.com/login', user)
+    axios.post('http://localhost:3000/login', user)
     .then(function (response) {
       console.log(response.data);
       if(response.data.token){

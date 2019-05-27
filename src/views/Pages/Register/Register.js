@@ -33,7 +33,7 @@ class Register extends Component {
 
     };
     console.log(user);
-    axios.post('https://adoptpet-api.herokuapp.com/usuarios/', user)
+    axios.post('http://localhost:3000/usuarios/', user)
     .then(function (response) {
       console.log(response.data);
       if(response.data.id){

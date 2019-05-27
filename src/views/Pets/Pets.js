@@ -48,7 +48,7 @@ class Pets extends Component {
   }
 
   findAllPets(_id) {
-    axios.get('https://adoptpet-api.herokuapp.com/pets/usuarios/' + _id)
+    axios.get('http://localhost:3000/pets/usuarios/' + _id)
     .then(res => {
       this.setState({pets: res.data})
       // console.log(this.state.pets)
@@ -69,11 +69,12 @@ class Pets extends Component {
       genero: this.state.genero,
       descricao: this.state.descricao,
       usuario_id: this.state.usuario_id,
-      foto : this.state.foto
+      foto : this.state.foto,
+      adotado : 0
     };
 
     console.log(pet);
-    axios.post('https://adoptpet-api.herokuapp.com/pets/', pet)
+    axios.post('http://localhost:3000/pets/', pet)
     .then(function (response) {
       // console.log(response.data);
       window.location.reload();

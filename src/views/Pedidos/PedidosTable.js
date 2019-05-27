@@ -9,7 +9,7 @@ class PedidosTable extends Component {
         status : _resposta
       };
   
-      axios.put('https://adoptpet-api.herokuapp.com/pedidos_resposta/'+_id, pedido)
+      axios.put('http://localhost:3000/pedidos_resposta/'+_id, pedido)
       .then(function (response) {
         console.log(response.data)
         window.location.reload();
@@ -17,6 +17,7 @@ class PedidosTable extends Component {
       .catch(function (error) {
         console.log(error);
         // alert(error)
+        window.location.reload();
       });
   }
   render() {

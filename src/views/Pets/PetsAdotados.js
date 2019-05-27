@@ -47,7 +47,7 @@ class PetsAdotados extends Component {
   }
 
   findAllPets(_id) {
-    axios.get('https://adoptpet-api.herokuapp.com/pets_adotados/' + _id)
+    axios.get('http://localhost:3000/pets_adotados/' + _id)
     .then(res => {
       this.setState({pets: res.data})
       // console.log(this.state.pets)

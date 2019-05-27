@@ -19,7 +19,7 @@ class User extends Component {
   }
 
   getUser() {
-    axios.get('https://adoptpet-api.herokuapp.com/usuarios/1')
+    axios.get('http://localhost:3000/usuarios/1')
     .then((res) => this.setState({usuario: res.data}))
       // .then(function (response) {
         
