@@ -221,7 +221,7 @@ class Pets extends Component {
                   <thead>
                       <tr>
                         <th scope="col">Nome</th>
-                        <th scope="col">Idade</th>
+                        <th scope="col">Data de Nascimento</th>
                         <th scope="col">Gênero</th>
                         <th scope="col">Espécie</th>
                         {/* <th scope="col">Editar/Excluir</th> */}
